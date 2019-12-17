@@ -1,0 +1,10 @@
+We’re asked to help the captain of the UCI’s tennis team to arrange a series of matches against
+Long Beach State’s team3
+. Both teams have n players; the tennis rating (a positive number,
+where a higher number can be interpreted to mean a better player) of the ith member of
+UCI’s team is ai and the tennis rating for the kth member of LBSU’s team is sk. We would
+like to set up a competition in which each person plays one match against a player from the
+opposite school. Because we get to select who plays against whom, our goal is to make sure
+that in as many matches as possible, the UCI player has a higher tennis rating than their
+opponent. Give an efficient greedy algorithm for this problem and prove that it is correct
+(maximizes the number of wins our team achieves).
