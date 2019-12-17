@@ -1,0 +1,40 @@
+- sort the scores of UCI players in a from least to greatest
+- sort scores of LBSU players in s from least to greatest
+We want to maximize M, the number of UCI players/scores in “winning” matches (UCI player has 
+higher rating than opponent). 
+
+Greedy Algorithm:
+For every UCI score i, check to see i is higher than s_j, the lowest unmatched LBSU score. 
+If it is not, i is lower than all of the unmatched scores, so it cannot be winning. We’ll then 
+match i with the highest unmatched LBSU score. If it is, traverse through L to find the highest s_k 
+such that a_i > s_k, match them i and k, and remove them from U and L, respectively. Continue until
+all players are matched.
+
+Proof
+Claim: There is an optimal solution where the lowest UCI ranking, a_0, is matched with x,  where x 
+is its match using the algorithm above (either s_(n-1) or s_k where s_k is highest ranking s.t. a_0 > s_k). 
+Proof by Contradiction: All optimal solutions have the a_0 not paired with x. The lowest-ranking 
+UCI player is instead paired with y and x is paired with a_j, in an arbitrary optimal solution OPT. 
+-> { (a_0, y), (a_j, x), …}
+We will rearrange the matches in OPT so that the a_0 is paired with s_x and the a_j is paired with 
+the 1st player’s former opponent, y, forming OPT’. 
+
+Claim: OPT’ is an optimal solution. 
+	Case 1) Greedy algorithm paired (a_0, x) with x = s_(n-1) (i is below all LBSU scores). 
+  Then, either a_0 was higher than all LBSU scores (in which case the pairings are trivial because 
+  all possible UCI-LBSU pairings will result in n winning matches and OPT’ is also optimal) or a_0 
+  was lower than all LBSU scores. We’ll deal with if the second is true. 
+  
+- Change #1: (a_0, y) -> (a_0, x) Since we concluded a_0 is lower than all LBSU scores, both 
+matches are losing and size of m is the same.
+
+- Change #2: (a_j, x) -> (a_j, y) X is the highest LBSU score, so y < x. Then, since a_j was
+greater than x, so a_j is still greater than y,  a_j will still be in M if it was there. Size of m is the same.
+
+	Case #2) Algorithm paired such that x = s_k. 
+The number of winning matches, m, does not change. If x > y, a_0 was originally winning and still 
+is because s_k is the highest score s.t. A_0 > s_k. A_j is paired with an easier opponent, so m 
+will not decrease. If x < y, a_0 moves from losing to winning so m actually increases by 1. Then,
+even if a_j (now paired with a higher ranking) changes from winning to losing, m will stay the same. 
+	Since we have shown for all cases that the number of winning matches, m, does not change in OPT’, 
+  OPT’ (& by extension the greedy algorithm) is optimal.
